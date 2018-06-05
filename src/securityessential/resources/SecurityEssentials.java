@@ -139,11 +139,6 @@ public class SecurityEssentials extends javax.swing.JFrame {
 
         txtPathHash.setEditable(false);
         txtPathHash.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        txtPathHash.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPathHashActionPerformed(evt);
-            }
-        });
 
         btnSelecionarArqHash.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
         btnSelecionarArqHash.setText("...");
@@ -803,10 +798,6 @@ public class SecurityEssentials extends javax.swing.JFrame {
             Logger.getLogger(SecurityEssentials.class.getName()).log(Level.SEVERE, null, ex);
         }}
     }//GEN-LAST:event_btnGerarBackupActionPerformed
-
-    private void txtPathHashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPathHashActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPathHashActionPerformed
 
     /**
      * @param args the command line arguments
