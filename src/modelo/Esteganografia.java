@@ -12,13 +12,13 @@ import javax.swing.JOptionPane;
 public class Esteganografia {
 
 	 /*
-	 Encripta uma imagem com texto, o resultado será .png
-	 @param path         O caminho da imagem a ser modificada
-	 @param original    O nome da imagem que será modificada
-	 @param ext1          A extensão da imagem a ser modificada (jpg, png)
-	 @param stegan      O output do nome do arquivo
-	 @param message  O texto a ser escrito na imagem
-	 @param type	  integer que representa encriptação simples ou avançada
+            Encripta uma imagem com texto, o resultado será .png
+            @param path         O caminho da imagem a ser modificada
+            @param original    O nome da imagem que será modificada
+            @param ext1          A extensão da imagem a ser modificada (jpg, png)
+            @param stegan      O output do nome do arquivo
+            @param message  O texto a ser escrito na imagem
+            @param type	  integer que representa encriptação simples ou avançada
 	 */
 	public static boolean encode(String path, String original, String ext1, String stegan, String message)
 	{
@@ -32,10 +32,10 @@ public class Esteganografia {
 	}
 
 	 /*
-   A decriptação assume que a imagem  da qual a mensagem será extraída é do tipo .png
-	 @param path   O path (folder) que contém a imagem da qual a mensagem será extraída
-	 @param name O nome da imagem da qual a mensagem será extraída
-	 @param type integer que representa encriptação simples ou avançada
+            A decriptação assume que a imagem  da qual a mensagem será extraída é do tipo .png
+            @param path   O path (folder) que contém a imagem da qual a mensagem será extraída
+            @param name O nome da imagem da qual a mensagem será extraída
+            @param type integer que representa encriptação simples ou avançada
 	 */
 	public static String decode(String path, String name)
 	{
@@ -57,11 +57,11 @@ public class Esteganografia {
     }
 
 	 /*
-	 Retorna o path completo de uma arquivo, da forma: path\nome.ext
-	 @param path   O path (folder) do arquivo
-	 @param name O nome do arquivo
-	 @param ext      A extensão do arquivo
-	 @return Uma String que representa o path completo do arquivo
+            Retorna o path completo de uma arquivo, da forma: path\nome.ext
+            @param path   O path (folder) do arquivo
+            @param name O nome do arquivo
+            @param ext      A extensão do arquivo
+            @return Uma String que representa o path completo do arquivo
 	 */
 	private static String image_path(String path, String name, String ext)
 	{
@@ -71,10 +71,10 @@ public class Esteganografia {
 	}
 
 	 /*
-	 Método get para retornar um aruqivo imagem
-	 @param f O path completo da imagem
-	 @return Uma BufferedImage do path fornecido
-	 @see    Steganography.image_path
+            Método get para retornar um aruqivo imagem
+            @param f O path completo da imagem
+            @return Uma BufferedImage do path fornecido
+            @see    Steganography.image_path
 	 */
 	private static BufferedImage getImage(String f)
 	{
@@ -94,11 +94,11 @@ public class Esteganografia {
 	}
 
 	 /*
-	 Método para salvar um arquivo de imagem
-	 @param image O arquivo imagem a ser salvo
-	 @param file      Arquivo no qual a imagem será salva
-	 @param ext      A extensão (formato) no qual será salva
-	 @return Retorna true se a imagem for salva
+            Método para salvar um arquivo de imagem
+            @param image O arquivo imagem a ser salvo
+            @param file      Arquivo no qual a imagem será salva
+            @param ext      A extensão (formato) no qual será salva
+            @return Retorna true se a imagem for salva
 	 */
 	private static boolean setImage(BufferedImage image, File file, String ext)
 	{
@@ -117,10 +117,10 @@ public class Esteganografia {
 	}
 
 	 /*
-	 Adiciona texto a imagem
-	 @param image A imagem na qual será adicionada a imagem
-	 @param text     O texto a ser escondido na imagem
-	 @return Retorna uma imagem com o texto escondido nela
+            Adiciona texto a imagem
+            @param image A imagem na qual será adicionada a imagem
+            @param text     O texto a ser escondido na imagem
+            @return Retorna uma imagem com o texto escondido nela
 	 */
 	private static BufferedImage add_text(BufferedImage image, String text)
 	{
@@ -142,9 +142,9 @@ public class Esteganografia {
 	}
 
 	 /*
-	 Cria uma versão user space da  BufferedImage, para editar e salvar bytes
-	 @param image A imagem a ser colocada no user space, remove interferências de compressão
-	 @return A versão user space da imagem enviada
+            Cria uma versão user space da  BufferedImage, para editar e salvar bytes
+            @param image A imagem a ser colocada no user space, remove interferências de compressão
+            @return A versão user space da imagem enviada
 	 */
 	private static BufferedImage user_space(BufferedImage image)
 	{
@@ -157,12 +157,12 @@ public class Esteganografia {
 	}
 
 	 /*
-   Pega o byte array da imagem
-	 @param image A imagem da qual será extraído os dados em byte
-	 @return Retorna o byte array para a imagem enviada
-	 @see Raster
-	 @see WritableRaster
-	 @see DataBufferByte
+            Pega o byte array da imagem
+            @param image A imagem da qual será extraído os dados em byte
+            @return Retorna o byte array para a imagem enviada
+            @see Raster
+            @see WritableRaster
+            @see DataBufferByte
 	 */
 	private static byte[] get_byte_data(BufferedImage image)
 	{
@@ -172,9 +172,9 @@ public class Esteganografia {
 	}
 
 	 /*
-	 Converte integer para byte
-	 @param i A integer a ser convertida
-	 @return Retorna um array byte[4], convertendo a integer enviada para bytes
+            Converte integer para byte
+            @param i A integer a ser convertida
+            @return Retorna um array byte[4], convertendo a integer enviada para bytes
 	 */
 	private static byte[] bit_conversion(int i)
 	{
@@ -194,11 +194,11 @@ public class Esteganografia {
 	}
 
 	 /*
-	 Encripta um array de bytes dentro de outro array de bytes, num offset fornecido
-	 @param image     Array de dados representando uma imagem
-	 @param addition Array de dados para adicionar ao array de imagem fornecido
-	 @param offset      O offset no array da imagem para adicionar os dados
-	 @return Returns data Array merge da imagem e dados
+            Encripta um array de bytes dentro de outro array de bytes, num offset fornecido
+            @param image     Array de dados representando uma imagem
+            @param addition Array de dados para adicionar ao array de imagem fornecido
+            @param offset      O offset no array da imagem para adicionar os dados
+            @return Returns data Array merge da imagem e dados
 	 */
 	private static byte[] encode_text(byte[] image, byte[] addition, int offset)
 	{
@@ -222,9 +222,9 @@ public class Esteganografia {
 	}
 
 	 /*
-	 Recupera o texto escondido na imagem
-	 @param image Array de dados, representando uma imagem
-	 @return Array de dados, que contém o texto escondido
+            Recupera o texto escondido na imagem
+            @param image Array de dados, representando uma imagem
+            @return Array de dados, que contém o texto escondido
 	 */
 	private static byte[] decode_text(byte[] image)
 	{

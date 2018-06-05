@@ -8,10 +8,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import org.apache.commons.io.FileUtils;
 
-/**
- *
- * @author stephaniescremin
- */
 public class Backup {
     public static void copy(File sourceLocation, File targetLocation) throws IOException {
 try {

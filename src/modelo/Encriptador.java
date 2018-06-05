@@ -54,24 +54,4 @@ public class Encriptador {
           e.printStackTrace();
       }
   }
-  //retirar essa parte
-  /*
-  public static void main(String[] args) {
-  	String key = "This is a secret";
-        String homeFldr = System.getProperty("user.home");
-        File desktop = new File(homeFldr, "Desktop");
-	File inputFile = new File(desktop, "text.png");
-	File encryptedFile = new File(desktop, "text.encrypted");
-	File decryptedFile = new File(desktop, "decrypted-text.png");
-		
-	try {
-	     Encriptador.processadorDeArquivos(Cipher.ENCRYPT_MODE,key,inputFile,encryptedFile);
-	     Encriptador.processadorDeArquivos(Cipher.DECRYPT_MODE,key,encryptedFile,decryptedFile);
-	     System.out.println("Sucess");
-	 } catch (Exception ex) {
-	     System.out.println(ex.getMessage());
-             ex.printStackTrace();
-	 }
-  }
-  */
 }
