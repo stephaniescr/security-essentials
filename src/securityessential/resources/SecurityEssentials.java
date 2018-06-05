@@ -107,6 +107,9 @@ public class SecurityEssentials extends javax.swing.JFrame {
         btnSelecionarBackupFolder.setUI(new StyledButtonUI());
         btnGerarBackup.setUI(new StyledButtonUI());
         
+        //muda fonte do título da aba
+        tabbedPane.setFont( new Font( "Calibri", Font.PLAIN, 14 ) );
+        
         //muda a cor de fundo
         for (int i = 0; i < tabbedPane.getTabCount(); i++) {
             tabbedPane.getComponentAt(i).setBackground(new java.awt.Color(31, 27, 39));
@@ -201,6 +204,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
         lblTipoHash.setForeground(new java.awt.Color(255, 255, 255));
         lblTipoHash.setText("Escolha o tipo:");
 
+        cmbTipoHash.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         cmbTipoHash.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MD2", "MD5", "SHA-1", "SHA-256", "SHA-384", "SHA-512" }));
 
         txtHash.setEditable(false);
