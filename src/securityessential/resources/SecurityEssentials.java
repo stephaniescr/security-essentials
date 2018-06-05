@@ -5,9 +5,13 @@
  */
 package securityessential.resources;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
+import java.awt.RenderingHints;
 import static java.awt.SystemColor.text;
 import modelo.GeradorHash;
 import modelo.GeradorSenha;
@@ -27,20 +31,55 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.Cipher;
 import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicButtonUI;
 /**
  *
  * @author stephanie
  */
 public class SecurityEssentials extends javax.swing.JFrame {
 
+    //estilo para os botões
+    class StyledButtonUI extends BasicButtonUI {
+
+    @Override
+    public void installUI (JComponent c) {
+        super.installUI(c);
+        AbstractButton button = (AbstractButton) c;
+        button.setOpaque(false);
+        button.setBorder(new EmptyBorder(5, 15, 5, 15));
+    }
+
+    @Override
+    public void paint (Graphics g, JComponent c) {
+        AbstractButton b = (AbstractButton) c;
+        paintBackground(g, b, b.getModel().isPressed() ? 2 : 0);
+        super.paint(g, c);
+    }
+
+    private void paintBackground (Graphics g, JComponent c, int yOffset) {
+        Dimension size = c.getSize();
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setColor(c.getBackground().darker());
+        g.fillRoundRect(0, yOffset, size.width, size.height - yOffset, 10, 10);
+        g.setColor(c.getBackground());
+        g.fillRoundRect(0, yOffset, size.width, size.height + yOffset - 5, 10, 10);
+    }
+    }
+    
     /**
      * Creates new form JFileChooserDemo
      */
     public SecurityEssentials() throws IOException {
-
+        
+        //carrega a fonte
         try {
             String fName = "/securityessential/resources/VT323-Regular.ttf";
             InputStream is = SecurityEssentials.class.getResourceAsStream(fName);
@@ -51,17 +90,27 @@ public class SecurityEssentials extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(SecurityEssentials.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         initComponents();
-        //getContentPane().setBackground(new java.awt.Color(42, 77, 105));
+        
+        //adiciona estilo aos botões
+        btnSelecionarArqHash.setUI(new StyledButtonUI());
+        btnGerarHash.setUI(new StyledButtonUI());
+        btnGerarSenha.setUI(new StyledButtonUI());
+        btnSelecionarArqAES.setUI(new StyledButtonUI());
+        btnEncriptar.setUI(new StyledButtonUI());
+        btnDecriptar.setUI(new StyledButtonUI());
+        btnSelecionarArqImg.setUI(new StyledButtonUI());
+        btnAdcMsg.setUI(new StyledButtonUI());
+        btnExtrairMsg.setUI(new StyledButtonUI());
+        btnSelecionarOriginFolder.setUI(new StyledButtonUI());
+        btnSelecionarBackupFolder.setUI(new StyledButtonUI());
+        btnGerarBackup.setUI(new StyledButtonUI());
+        
+        //muda a cor de fundo
         for (int i = 0; i < tabbedPane.getTabCount(); i++) {
             tabbedPane.getComponentAt(i).setBackground(new java.awt.Color(31, 27, 39));
         }
-
-        //tabbedPane.setBackgroundAt(0,new java.awt.Color(42, 77, 105));
-       // tabbedPane.setIconAt(0, new ImageIcon(ImageIO.read(getClass().getResource("/storing.png")))
-          //
-        //        );
     }
 
     /**
@@ -157,7 +206,11 @@ public class SecurityEssentials extends javax.swing.JFrame {
         txtHash.setEditable(false);
         txtHash.setBackground(new java.awt.Color(204, 204, 204));
 
+        btnGerarHash.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         btnGerarHash.setText("Gerar hash");
+        btnGerarHash.setMaximumSize(new java.awt.Dimension(95, 30));
+        btnGerarHash.setMinimumSize(new java.awt.Dimension(95, 30));
+        btnGerarHash.setPreferredSize(new java.awt.Dimension(95, 30));
         btnGerarHash.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGerarHashActionPerformed(evt);
@@ -179,7 +232,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(170, 170, 170)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnGerarHash)
+                    .addComponent(btnGerarHash, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblHeaderHash)
                     .addComponent(lblSelecioneArqHash)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -188,7 +241,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
                         .addComponent(btnSelecionarArqHash, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblTipoHash)
-                        .addGap(10, 10, 10)
+                        .addGap(8, 8, 8)
                         .addComponent(cmbTipoHash, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtHash, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(170, 170, 170))
@@ -204,18 +257,20 @@ public class SecurityEssentials extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPathHash, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSelecionarArqHash))
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTipoHash)
                     .addComponent(cmbTipoHash, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnGerarHash)
-                .addGap(16, 16, 16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnGerarHash, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
                 .addComponent(txtHash, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
         );
 
         tabbedPane.addTab("Gerador de Hash ", new javax.swing.ImageIcon(getClass().getResource("/securityessential/resources/encryption_s.png")), jPanel2); // NOI18N
+
+        jPanel3.setToolTipText("");
 
         lblHeaderSenha.setFont(new java.awt.Font("VT323", 1, 36)); // NOI18N
         lblHeaderSenha.setForeground(new java.awt.Color(255, 255, 255));
@@ -225,7 +280,11 @@ public class SecurityEssentials extends javax.swing.JFrame {
         lblTamanhoSenha.setForeground(new java.awt.Color(255, 255, 255));
         lblTamanhoSenha.setText("Tamanho da senha:");
 
+        btnGerarSenha.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         btnGerarSenha.setText("Gerar senha");
+        btnGerarSenha.setMaximumSize(new java.awt.Dimension(101, 30));
+        btnGerarSenha.setMinimumSize(new java.awt.Dimension(101, 30));
+        btnGerarSenha.setPreferredSize(new java.awt.Dimension(101, 30));
         btnGerarSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGerarSenhaActionPerformed(evt);
@@ -262,7 +321,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
                         .addComponent(lblTamanhoSenha)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTamanhoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnGerarSenha)
+                    .addComponent(btnGerarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(ckbNumeros)
@@ -291,8 +350,8 @@ public class SecurityEssentials extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ckbEspeciais)
                     .addComponent(ckbNumeros))
-                .addGap(18, 18, 18)
-                .addComponent(btnGerarSenha)
+                .addGap(13, 13, 13)
+                .addComponent(btnGerarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
@@ -304,14 +363,22 @@ public class SecurityEssentials extends javax.swing.JFrame {
         lblHeaderAES.setForeground(new java.awt.Color(255, 255, 255));
         lblHeaderAES.setText("Encriptação AES");
 
+        btnEncriptar.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         btnEncriptar.setText("Encriptar");
+        btnEncriptar.setMaximumSize(new java.awt.Dimension(85, 30));
+        btnEncriptar.setMinimumSize(new java.awt.Dimension(85, 30));
+        btnEncriptar.setPreferredSize(new java.awt.Dimension(85, 30));
         btnEncriptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEncriptarActionPerformed(evt);
             }
         });
 
+        btnDecriptar.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         btnDecriptar.setText("Decriptar");
+        btnDecriptar.setMaximumSize(new java.awt.Dimension(87, 30));
+        btnDecriptar.setMinimumSize(new java.awt.Dimension(87, 30));
+        btnDecriptar.setPreferredSize(new java.awt.Dimension(87, 30));
         btnDecriptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDecriptarActionPerformed(evt);
@@ -346,9 +413,9 @@ public class SecurityEssentials extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(lblHeaderAES)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btnEncriptar)
+                        .addComponent(btnEncriptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDecriptar))
+                        .addComponent(btnDecriptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(txtPathAES, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -374,9 +441,9 @@ public class SecurityEssentials extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtChaveAES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEncriptar)
-                    .addComponent(btnDecriptar))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnDecriptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEncriptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(45, 45, 45))
         );
 
@@ -401,14 +468,22 @@ public class SecurityEssentials extends javax.swing.JFrame {
         lblMensagem.setForeground(new java.awt.Color(255, 255, 255));
         lblMensagem.setText("Mensagem:");
 
+        btnAdcMsg.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         btnAdcMsg.setText("Adicionar mensagem");
+        btnAdcMsg.setMaximumSize(new java.awt.Dimension(151, 30));
+        btnAdcMsg.setMinimumSize(new java.awt.Dimension(151, 30));
+        btnAdcMsg.setPreferredSize(new java.awt.Dimension(151, 30));
         btnAdcMsg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdcMsgActionPerformed(evt);
             }
         });
 
+        btnExtrairMsg.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         btnExtrairMsg.setText("Extrair mensagem");
+        btnExtrairMsg.setMaximumSize(new java.awt.Dimension(135, 30));
+        btnExtrairMsg.setMinimumSize(new java.awt.Dimension(135, 30));
+        btnExtrairMsg.setPreferredSize(new java.awt.Dimension(135, 30));
         btnExtrairMsg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExtrairMsgActionPerformed(evt);
@@ -436,9 +511,9 @@ public class SecurityEssentials extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAdcMsg)
+                        .addComponent(btnAdcMsg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExtrairMsg))
+                        .addComponent(btnExtrairMsg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblHeaderEsteganografia))
                 .addGap(158, 158, 158))
         );
@@ -459,8 +534,8 @@ public class SecurityEssentials extends javax.swing.JFrame {
                     .addComponent(lblMensagem))
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdcMsg)
-                    .addComponent(btnExtrairMsg))
+                    .addComponent(btnAdcMsg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExtrairMsg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45))
         );
 
@@ -500,7 +575,11 @@ public class SecurityEssentials extends javax.swing.JFrame {
             }
         });
 
+        btnGerarBackup.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         btnGerarBackup.setText("Gerar Backup");
+        btnGerarBackup.setMaximumSize(new java.awt.Dimension(109, 30));
+        btnGerarBackup.setMinimumSize(new java.awt.Dimension(109, 30));
+        btnGerarBackup.setPreferredSize(new java.awt.Dimension(109, 30));
         btnGerarBackup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGerarBackupActionPerformed(evt);
@@ -537,7 +616,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
                         .addComponent(txtPathBackupFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSelecionarBackupFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnGerarBackup))
+                    .addComponent(btnGerarBackup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(153, 153, 153))
         );
         jPanel5Layout.setVerticalGroup(
@@ -558,7 +637,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
                     .addComponent(txtPathBackupFolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSelecionarBackupFolder))
                 .addGap(40, 40, 40)
-                .addComponent(btnGerarBackup)
+                .addComponent(btnGerarBackup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
         );
 
