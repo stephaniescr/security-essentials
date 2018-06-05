@@ -5,6 +5,9 @@
  */
 package securityessential.resources;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import static java.awt.SystemColor.text;
 import modelo.GeradorHash;
 import modelo.GeradorSenha;
