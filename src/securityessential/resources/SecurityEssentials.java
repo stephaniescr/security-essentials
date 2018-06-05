@@ -580,13 +580,13 @@ public class SecurityEssentials extends javax.swing.JFrame {
 
     private void btnGerarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarSenhaActionPerformed
         if(txtTamanhoSenha.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O campo de tamanho da senha deve ser preenchido.");
+            JOptionPane.showMessageDialog(null, "O campo de tamanho da senha deve ser preenchido","Erro",JOptionPane.ERROR_MESSAGE);
         }
         else if(!ckbNumeros.isSelected()&&
                 !ckbCaixaBaixa.isSelected()&&
                 !ckbCaixaAlta.isSelected()&&
                 !ckbEspeciais.isSelected()) {
-            JOptionPane.showMessageDialog(null, "Pelo menos uma opção de caracteres deve ser selecionada.");
+            JOptionPane.showMessageDialog(null, "Pelo menos uma opção de caracteres deve ser selecionada","Erro",JOptionPane.ERROR_MESSAGE);
         }
         else {
             GeradorSenha GeradorSenha = new GeradorSenha.GeradorSenhaConstrutor()
@@ -614,7 +614,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
     private void btnGerarHashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarHashActionPerformed
         File file = fileChooser.getSelectedFile();
         if(txtPathHash.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Deve ser selecionado um arquivo.");
+            JOptionPane.showMessageDialog(null, "Deve ser selecionado um arquivo","Erro",JOptionPane.ERROR_MESSAGE);
         } else {
             try {
               // What to do with the file, e.g. display it in a TextArea
@@ -624,7 +624,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
               //textarea.read( new FileReader( hash ), null );
               txtHash.setText(hash);
             } catch (IOException ex) {
-              System.out.println("problem accessing file"+file.getAbsolutePath());
+              System.out.println("problem accessing file "+file.getAbsolutePath());
             } catch (Exception ex) {
                 Logger.getLogger(SecurityEssentials.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -648,12 +648,11 @@ public class SecurityEssentials extends javax.swing.JFrame {
         no qual o arquivo encriptado/decriptado será salvo.
         por enquanto, será salvo no mesmo diretório do arquivo a ser encriptado/decriptado.
         */
-        //String hash = modelo.GeradorHash.getChecksum(file, tipo);
         if(txtPathAES.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Deve ser selecionado um arquivo.");
+            JOptionPane.showMessageDialog(null, "Deve ser selecionado um arquivo","Erro",JOptionPane.ERROR_MESSAGE);
         }
         else if(txtChaveAES.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O campo de chave deve ser preenchido.");
+            JOptionPane.showMessageDialog(null, "O campo de chave deve ser preenchido","Erro",JOptionPane.ERROR_MESSAGE);
         }
         else {
             String key = txtChaveAES.getText();
@@ -678,13 +677,13 @@ public class SecurityEssentials extends javax.swing.JFrame {
         File encryptedFile = fileChooser.getSelectedFile();
         String fileName = encryptedFile.getName();
         if(txtPathAES.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Deve ser selecionado um arquivo.");
+            JOptionPane.showMessageDialog(null, "Deve ser selecionado um arquivo","Erro",JOptionPane.ERROR_MESSAGE);
         }
         else if(txtChaveAES.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O campo de chave deve ser preenchido.");
+            JOptionPane.showMessageDialog(null, "O campo de chave deve ser preenchido","Erro",JOptionPane.ERROR_MESSAGE);
         }
         else if(!fileName.substring(fileName.length()-4).equals(".aes")){
-            JOptionPane.showMessageDialog(null, "O formato do arquivo deve ser .aes");
+            JOptionPane.showMessageDialog(null, "O formato do arquivo deve ser .aes","Erro",JOptionPane.ERROR_MESSAGE);
         }
         else {
             String key = txtChaveAES.getText();
@@ -693,7 +692,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
             File decryptedFile = new File(folderToSaveOn, decryptedFileName);
             try {
                  Encriptador.processadorDeArquivos(Cipher.DECRYPT_MODE,key,encryptedFile,decryptedFile);
-                 JOptionPane.showMessageDialog(null, "Arquivo decriptado com sucesso!");
+                 JOptionPane.showMessageDialog(null, "Arquivo decriptado com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
              } catch (Exception e) {
                  System.out.println(e.getMessage());
                  e.printStackTrace();
@@ -713,10 +712,10 @@ public class SecurityEssentials extends javax.swing.JFrame {
 
     private void btnAdcMsgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdcMsgActionPerformed
         if(txtPathImg.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Deve ser selecionada uma imagem.");
+            JOptionPane.showMessageDialog(null, "Deve ser selecionada uma imagem.","Erro",JOptionPane.ERROR_MESSAGE);
         } else{
                     if(txtMensagem.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Deve ser digitada uma mensagem.");
+            JOptionPane.showMessageDialog(null, "Deve ser digitada uma mensagem.","Erro",JOptionPane.ERROR_MESSAGE);
         } else{
 
         File imagem = fileChooser.getSelectedFile();
@@ -729,7 +728,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
         System.out.println(fileNameWithoutEx);
         System.out.println(outputFileName);
         if(Esteganografia.encode(path,fileNameWithoutEx,"jpg",outputFileName,mensagem)){
-            JOptionPane.showMessageDialog(null, "Mensagem gravada com sucesso!");
+            JOptionPane.showMessageDialog(null, "Mensagem gravada com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
         }
         else {
             JOptionPane.showMessageDialog(null,
@@ -748,7 +747,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
         System.out.println(fileName);
         System.out.println(fileNameWithoutEx);
         String message = modelo.Esteganografia.decode(stat_path, fileNameWithoutEx);
-        JOptionPane.showMessageDialog(null, "Mensagem extraída com sucesso!");
+        JOptionPane.showMessageDialog(null, "Mensagem extraída com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
         txtMensagem.setText(message);
     }//GEN-LAST:event_btnExtrairMsgActionPerformed
 
