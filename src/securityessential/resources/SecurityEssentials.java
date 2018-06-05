@@ -37,15 +37,27 @@ public class SecurityEssentials extends javax.swing.JFrame {
      * Creates new form JFileChooserDemo
      */
     public SecurityEssentials() throws IOException {
+
+        try {
+            String fName = "/securityessential/resources/VT323-Regular.ttf";
+            InputStream is = SecurityEssentials.class.getResourceAsStream(fName);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
+        } catch (FontFormatException ex) {
+            Logger.getLogger(SecurityEssentials.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SecurityEssentials.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         initComponents();
         //getContentPane().setBackground(new java.awt.Color(42, 77, 105));
         for (int i = 0; i < tabbedPane.getTabCount(); i++) {
             tabbedPane.getComponentAt(i).setBackground(new java.awt.Color(31, 27, 39));
         }
-        
+
         //tabbedPane.setBackgroundAt(0,new java.awt.Color(42, 77, 105));
        // tabbedPane.setIconAt(0, new ImageIcon(ImageIO.read(getClass().getResource("/storing.png")))
-          //      
+          //
         //        );
     }
 
@@ -564,7 +576,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
     private void btnGerarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarSenhaActionPerformed
         if(txtTamanhoSenha.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "O campo de tamanho da senha deve ser preenchido.");
-        } 
+        }
         else if(!ckbNumeros.isSelected()&&
                 !ckbCaixaBaixa.isSelected()&&
                 !ckbCaixaAlta.isSelected()&&
@@ -668,7 +680,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
         }
         else if(!fileName.substring(fileName.length()-4).equals(".aes")){
             JOptionPane.showMessageDialog(null, "O formato do arquivo deve ser .aes");
-        } 
+        }
         else {
             String key = txtChaveAES.getText();
             String decryptedFileName = fileName.substring(0,fileName.length()-4);
@@ -701,7 +713,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
                     if(txtMensagem.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Deve ser digitada uma mensagem.");
         } else{
-            
+
         File imagem = fileChooser.getSelectedFile();
         String path = imagem.getParent();
         String fileName = imagem.getName();
@@ -771,7 +783,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
                 if(txtPathOriginFolder.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Deve ser selecionado um arquivo ou diretório.");
         } else{
-        
+
         File origin = new File(txtPathOriginFolder.getText());
         File backup = new File(txtPathBackupFolder.getText());
         try {
@@ -789,7 +801,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
