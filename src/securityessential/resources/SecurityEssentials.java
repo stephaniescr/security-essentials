@@ -139,6 +139,11 @@ public class SecurityEssentials extends javax.swing.JFrame {
 
         txtPathHash.setEditable(false);
         txtPathHash.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        txtPathHash.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPathHashActionPerformed(evt);
+            }
+        });
 
         btnSelecionarArqHash.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
         btnSelecionarArqHash.setText("...");
@@ -148,7 +153,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
             }
         });
 
-        lblTipoHash.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
+        lblTipoHash.setFont(new java.awt.Font("VT323", 0, 24)); // NOI18N
         lblTipoHash.setForeground(new java.awt.Color(255, 255, 255));
         lblTipoHash.setText("Escolha o tipo:");
 
@@ -168,7 +173,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
         lblHeaderHash.setForeground(new java.awt.Color(255, 255, 255));
         lblHeaderHash.setText("Gerador de Hash");
 
-        lblSelecioneArqHash.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
+        lblSelecioneArqHash.setFont(new java.awt.Font("VT323", 0, 24)); // NOI18N
         lblSelecioneArqHash.setForeground(new java.awt.Color(255, 255, 255));
         lblSelecioneArqHash.setText("Selecione um arquivo:");
 
@@ -177,7 +182,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(180, 180, 180)
+                .addGap(170, 170, 170)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnGerarHash)
                     .addComponent(lblHeaderHash)
@@ -191,7 +196,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(cmbTipoHash, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtHash, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(180, 180, 180))
+                .addGap(170, 170, 170))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,7 +226,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
         lblHeaderSenha.setForeground(new java.awt.Color(255, 255, 255));
         lblHeaderSenha.setText("Gerador de Senha");
 
-        lblTamanhoSenha.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
+        lblTamanhoSenha.setFont(new java.awt.Font("VT323", 0, 24)); // NOI18N
         lblTamanhoSenha.setForeground(new java.awt.Color(255, 255, 255));
         lblTamanhoSenha.setText("Tamanho da senha:");
 
@@ -234,19 +239,19 @@ public class SecurityEssentials extends javax.swing.JFrame {
 
         txtSenha.setBackground(new java.awt.Color(204, 204, 204));
 
-        ckbNumeros.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
+        ckbNumeros.setFont(new java.awt.Font("VT323", 0, 20)); // NOI18N
         ckbNumeros.setForeground(new java.awt.Color(255, 255, 255));
         ckbNumeros.setText("Usar números");
 
-        ckbCaixaBaixa.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
+        ckbCaixaBaixa.setFont(new java.awt.Font("VT323", 0, 20)); // NOI18N
         ckbCaixaBaixa.setForeground(new java.awt.Color(255, 255, 255));
         ckbCaixaBaixa.setText("Usar caixa baixa");
 
-        ckbCaixaAlta.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
+        ckbCaixaAlta.setFont(new java.awt.Font("VT323", 0, 20)); // NOI18N
         ckbCaixaAlta.setForeground(new java.awt.Color(255, 255, 255));
         ckbCaixaAlta.setText("Usar caixa alta");
 
-        ckbEspeciais.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
+        ckbEspeciais.setFont(new java.awt.Font("VT323", 0, 20)); // NOI18N
         ckbEspeciais.setForeground(new java.awt.Color(255, 255, 255));
         ckbEspeciais.setText("Usar caracteres especiais");
 
@@ -255,7 +260,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(180, 180, 180)
+                .addGap(150, 150, 150)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(lblHeaderSenha)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -272,7 +277,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
                         .addComponent(ckbCaixaBaixa)
                         .addGap(1, 1, 1)
                         .addComponent(ckbCaixaAlta)))
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addGap(150, 150, 150))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,11 +334,11 @@ public class SecurityEssentials extends javax.swing.JFrame {
             }
         });
 
-        lblChave.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
+        lblChave.setFont(new java.awt.Font("VT323", 0, 24)); // NOI18N
         lblChave.setForeground(new java.awt.Color(255, 255, 255));
         lblChave.setText("Chave:");
 
-        lblSelecioneArqAES.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
+        lblSelecioneArqAES.setFont(new java.awt.Font("VT323", 0, 24)); // NOI18N
         lblSelecioneArqAES.setForeground(new java.awt.Color(255, 255, 255));
         lblSelecioneArqAES.setText("Selecione um arquivo:");
 
@@ -342,7 +347,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(180, 180, 180)
+                .addGap(173, 173, 173)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(lblHeaderAES)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -350,13 +355,13 @@ public class SecurityEssentials extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDecriptar))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(txtPathAES, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPathAES, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSelecionarArqAES, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblChave)
                     .addComponent(txtChaveAES, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSelecioneArqAES))
-                .addGap(180, 180, 180))
+                .addGap(173, 173, 173))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,7 +385,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
                 .addGap(45, 45, 45))
         );
 
-        tabbedPane.addTab("Encriptação AES ", new javax.swing.ImageIcon("/Users/stephaniescremin/Downloads/Icones/file_s.png"), jPanel4); // NOI18N
+        tabbedPane.addTab("Encriptação AES ", new javax.swing.ImageIcon(getClass().getResource("/securityessential/resources/eye_s.png")), jPanel4); // NOI18N
 
         txtPathImg.setEditable(false);
         txtPathImg.setDisabledTextColor(new java.awt.Color(204, 204, 204));
@@ -393,11 +398,11 @@ public class SecurityEssentials extends javax.swing.JFrame {
             }
         });
 
-        lblSelecioneArqImg.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
+        lblSelecioneArqImg.setFont(new java.awt.Font("VT323", 0, 24)); // NOI18N
         lblSelecioneArqImg.setForeground(new java.awt.Color(255, 255, 255));
         lblSelecioneArqImg.setText("Selecione uma imagem:");
 
-        lblMensagem.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
+        lblMensagem.setFont(new java.awt.Font("VT323", 0, 24)); // NOI18N
         lblMensagem.setForeground(new java.awt.Color(255, 255, 255));
         lblMensagem.setText("Mensagem:");
 
@@ -424,7 +429,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(180, 180, 180)
+                .addGap(158, 158, 158)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtPathImg, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -434,13 +439,13 @@ public class SecurityEssentials extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblMensagem)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnAdcMsg)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnExtrairMsg))
                     .addComponent(lblHeaderEsteganografia))
-                .addGap(180, 180, 180))
+                .addGap(158, 158, 158))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,7 +469,9 @@ public class SecurityEssentials extends javax.swing.JFrame {
                 .addGap(45, 45, 45))
         );
 
-        tabbedPane.addTab("Esteganografia ", new javax.swing.ImageIcon("/Users/stephaniescremin/Downloads/Icones/picture_s.png"), jPanel1); // NOI18N
+        tabbedPane.addTab("Esteganografia ", new javax.swing.ImageIcon(getClass().getResource("/securityessential/resources/picture_s.png")), jPanel1); // NOI18N
+
+        jPanel5.setPreferredSize(new java.awt.Dimension(600, 370));
 
         txtPathOriginFolder.setEditable(false);
         txtPathOriginFolder.setDisabledTextColor(new java.awt.Color(204, 204, 204));
@@ -505,11 +512,11 @@ public class SecurityEssentials extends javax.swing.JFrame {
             }
         });
 
-        lblBackupOrigin.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
+        lblBackupOrigin.setFont(new java.awt.Font("VT323", 0, 24)); // NOI18N
         lblBackupOrigin.setForeground(new java.awt.Color(255, 255, 255));
-        lblBackupOrigin.setText("Selecione o diretório ou arquivo que deseja copiar:");
+        lblBackupOrigin.setText("Selecione o que deseja copiar:");
 
-        lblBackup.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
+        lblBackup.setFont(new java.awt.Font("VT323", 0, 24)); // NOI18N
         lblBackup.setForeground(new java.awt.Color(255, 255, 255));
         lblBackup.setText("Selecione onde o backup será salvo:");
 
@@ -522,21 +529,21 @@ public class SecurityEssentials extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(180, 180, 180)
+                .addGap(153, 153, 153)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(txtPathBackupFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSelecionarBackupFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnGerarBackup)
                     .addComponent(lblBackupOrigin)
                     .addComponent(lblBackup)
                     .addComponent(lblHeaderBackup)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(txtPathOriginFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSelecionarOriginFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(180, 180, 180))
+                        .addComponent(btnSelecionarOriginFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(txtPathBackupFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSelecionarBackupFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGerarBackup))
+                .addGap(153, 153, 153))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -549,7 +556,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSelecionarOriginFolder)
                     .addComponent(txtPathOriginFolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGap(29, 29, 29)
                 .addComponent(lblBackup)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -560,13 +567,13 @@ public class SecurityEssentials extends javax.swing.JFrame {
                 .addGap(45, 45, 45))
         );
 
-        tabbedPane.addTab("Backup ", new javax.swing.ImageIcon("/Users/stephaniescremin/Downloads/icons/upload_s.png"), jPanel5); // NOI18N
+        tabbedPane.addTab("Backup ", new javax.swing.ImageIcon(getClass().getResource("/securityessential/resources/upload_s.png")), jPanel5); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(tabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -796,6 +803,10 @@ public class SecurityEssentials extends javax.swing.JFrame {
             Logger.getLogger(SecurityEssentials.class.getName()).log(Level.SEVERE, null, ex);
         }}
     }//GEN-LAST:event_btnGerarBackupActionPerformed
+
+    private void txtPathHashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPathHashActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPathHashActionPerformed
 
     /**
      * @param args the command line arguments
