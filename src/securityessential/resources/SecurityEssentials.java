@@ -614,7 +614,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
     private void btnGerarHashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarHashActionPerformed
         File file = fileChooser.getSelectedFile();
         if(txtPathHash.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Deve ser selecionado um arquivo","Erro",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Deve ser selecionado um arquivo","Aviso",JOptionPane.WARNING_MESSAGE);
         } else {
             try {
               // What to do with the file, e.g. display it in a TextArea
@@ -649,10 +649,10 @@ public class SecurityEssentials extends javax.swing.JFrame {
         por enquanto, será salvo no mesmo diretório do arquivo a ser encriptado/decriptado.
         */
         if(txtPathAES.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Deve ser selecionado um arquivo","Erro",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Deve ser selecionado um arquivo","Aviso",JOptionPane.WARNING_MESSAGE);
         }
         else if(txtChaveAES.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O campo de chave deve ser preenchido","Erro",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O campo de chave deve ser preenchido","Aviso",JOptionPane.WARNING_MESSAGE);
         }
         else {
             String key = txtChaveAES.getText();
@@ -677,13 +677,13 @@ public class SecurityEssentials extends javax.swing.JFrame {
         File encryptedFile = fileChooser.getSelectedFile();
         String fileName = encryptedFile.getName();
         if(txtPathAES.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Deve ser selecionado um arquivo","Erro",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Deve ser selecionado um arquivo","Aviso",JOptionPane.WARNING_MESSAGE);
         }
         else if(txtChaveAES.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O campo de chave deve ser preenchido","Erro",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O campo de chave deve ser preenchido","Aviso",JOptionPane.WARNING_MESSAGE);
         }
         else if(!fileName.substring(fileName.length()-4).equals(".aes")){
-            JOptionPane.showMessageDialog(null, "O formato do arquivo deve ser .aes","Erro",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O formato do arquivo deve ser .aes","Aviso",JOptionPane.WARNING_MESSAGE);
         }
         else {
             String key = txtChaveAES.getText();
@@ -712,10 +712,10 @@ public class SecurityEssentials extends javax.swing.JFrame {
 
     private void btnAdcMsgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdcMsgActionPerformed
         if(txtPathImg.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Deve ser selecionada uma imagem.","Erro",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Deve ser selecionada uma imagem","Aviso",JOptionPane.WARNING_MESSAGE);
         } else{
                     if(txtMensagem.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Deve ser digitada uma mensagem.","Erro",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Deve ser digitada uma mensagem","Aviso",JOptionPane.WARNING_MESSAGE);
         } else{
 
         File imagem = fileChooser.getSelectedFile();
@@ -785,14 +785,14 @@ public class SecurityEssentials extends javax.swing.JFrame {
 
     private void btnGerarBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarBackupActionPerformed
                 if(txtPathOriginFolder.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Deve ser selecionado um arquivo ou diretório.");
+            JOptionPane.showMessageDialog(null, "Deve ser selecionado um arquivo ou diretório","Aviso",JOptionPane.WARNING_MESSAGE);
         } else{
 
         File origin = new File(txtPathOriginFolder.getText());
         File backup = new File(txtPathBackupFolder.getText());
         try {
             Backup.copy(origin,backup);
-                        JOptionPane.showMessageDialog(null, "Backup gerado com sucesso!");
+                        JOptionPane.showMessageDialog(null, "Backup gerado com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException ex) {
             Logger.getLogger(SecurityEssentials.class.getName()).log(Level.SEVERE, null, ex);
         }}
