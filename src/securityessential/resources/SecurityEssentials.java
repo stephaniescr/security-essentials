@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package securityessential.resources;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -12,33 +11,24 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
-import static java.awt.SystemColor.text;
 import modelo.GeradorHash;
 import modelo.GeradorSenha;
 import modelo.Encriptador;
 import modelo.Esteganografia;
 import modelo.Backup;
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.MessageDigest;
-import java.security.Security;
-import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.Cipher;
-import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicButtonUI;
+import org.apache.commons.io.FilenameUtils;
 /**
  *
  * @author stephanie
@@ -663,13 +653,13 @@ public class SecurityEssentials extends javax.swing.JFrame {
 
     private void btnGerarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarSenhaActionPerformed
         if(txtTamanhoSenha.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O campo de tamanho da senha deve ser preenchido","Erro",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O campo de tamanho da senha deve ser preenchido","Aviso",JOptionPane.WARNING_MESSAGE);
         }
         else if(!ckbNumeros.isSelected()&&
                 !ckbCaixaBaixa.isSelected()&&
                 !ckbCaixaAlta.isSelected()&&
                 !ckbEspeciais.isSelected()) {
-            JOptionPane.showMessageDialog(null, "Pelo menos uma opção de caracteres deve ser selecionada","Erro",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Pelo menos uma opção de caracteres deve ser selecionada","Aviso",JOptionPane.WARNING_MESSAGE);
         }
         else {
             GeradorSenha GeradorSenha = new GeradorSenha.GeradorSenhaConstrutor()
@@ -707,7 +697,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
               //textarea.read( new FileReader( hash ), null );
               txtHash.setText(hash);
             } catch (IOException ex) {
-              System.out.println("problem accessing file "+file.getAbsolutePath());
+              System.out.println("Problema ao acessar arquivo "+file.getAbsolutePath());
             } catch (Exception ex) {
                 Logger.getLogger(SecurityEssentials.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -756,19 +746,18 @@ public class SecurityEssentials extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEncriptarActionPerformed
 
     private void btnDecriptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDecriptarActionPerformed
-        //Security.setProperty("crypto.policy", "unlimited");
-        File encryptedFile = fileChooser.getSelectedFile();
-        String fileName = encryptedFile.getName();
         if(txtPathAES.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Deve ser selecionado um arquivo","Aviso",JOptionPane.WARNING_MESSAGE);
         }
         else if(txtChaveAES.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "O campo de chave deve ser preenchido","Aviso",JOptionPane.WARNING_MESSAGE);
         }
-        else if(!fileName.substring(fileName.length()-4).equals(".aes")){
-            JOptionPane.showMessageDialog(null, "O formato do arquivo deve ser .aes","Aviso",JOptionPane.WARNING_MESSAGE);
-        }
         else {
+            File encryptedFile = fileChooser.getSelectedFile();
+            String fileName = encryptedFile.getName();
+            if(!fileName.substring(fileName.length()-4).equals(".aes")){
+                JOptionPane.showMessageDialog(null, "O formato do arquivo deve ser .aes","Aviso",JOptionPane.WARNING_MESSAGE);
+            }
             String key = txtChaveAES.getText();
             String decryptedFileName = fileName.substring(0,fileName.length()-4);
             String folderToSaveOn = encryptedFile.getParent();
@@ -796,42 +785,41 @@ public class SecurityEssentials extends javax.swing.JFrame {
     private void btnAdcMsgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdcMsgActionPerformed
         if(txtPathImg.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Deve ser selecionada uma imagem","Aviso",JOptionPane.WARNING_MESSAGE);
-        } else{
-                    if(txtMensagem.getText().isEmpty()) {
+        } else if(txtMensagem.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Deve ser digitada uma mensagem","Aviso",JOptionPane.WARNING_MESSAGE);
         } else{
-
-        File imagem = fileChooser.getSelectedFile();
-        String path = imagem.getParent();
-        String fileName = imagem.getName();
-        String fileNameWithoutEx = fileName.substring(0,fileName.length()-4);
-        String outputFileName = fileName + "modified.jpg";
-        String mensagem = txtMensagem.getText();
-        System.out.println(path);
-        System.out.println(fileNameWithoutEx);
-        System.out.println(outputFileName);
-        if(Esteganografia.encode(path,fileNameWithoutEx,"jpg",outputFileName,mensagem)){
-            JOptionPane.showMessageDialog(null, "Mensagem gravada com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
+            File imagem = fileChooser.getSelectedFile();
+            String path = imagem.getParent();
+            String fileName = imagem.getName();
+            String extension = FilenameUtils.getExtension(imagem.getPath());
+            String fileNameWithoutEx = fileName.substring(0,fileName.length()-4);
+            String outputFileName = fileNameWithoutEx + "(modificado)";
+            String mensagem = txtMensagem.getText();
+            if(Esteganografia.encode(path,fileNameWithoutEx,extension,outputFileName,mensagem)){
+                JOptionPane.showMessageDialog(null, "Mensagem gravada com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
+            }
+            else {
+                JOptionPane.showMessageDialog(null,
+                        "A mensagem não foi gravada",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
-        else {
-            JOptionPane.showMessageDialog(null,
-                    "The Image could not be encoded!",
-                    "Error!", JOptionPane.INFORMATION_MESSAGE);
-        }
-        }}
     }//GEN-LAST:event_btnAdcMsgActionPerformed
 
     private void btnExtrairMsgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtrairMsgActionPerformed
-        File imagem = fileChooser.getSelectedFile();
-        String stat_path = imagem.getParent();
-        String fileName = imagem.getName();
-        String fileNameWithoutEx = fileName.substring(0,fileName.length()-4);
-        System.out.println(stat_path);
-        System.out.println(fileName);
-        System.out.println(fileNameWithoutEx);
-        String message = modelo.Esteganografia.decode(stat_path, fileNameWithoutEx);
-        JOptionPane.showMessageDialog(null, "Mensagem extraída com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
-        txtMensagem.setText(message);
+        if(txtPathImg.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Deve ser selecionada uma imagem","Aviso",JOptionPane.WARNING_MESSAGE);
+        } else {
+            File imagem = fileChooser.getSelectedFile();
+            String stat_path = imagem.getParent();
+            String fileName = imagem.getName();
+            String fileNameWithoutEx = fileName.substring(0,fileName.length()-4);
+            String message = modelo.Esteganografia.decode(stat_path, fileNameWithoutEx);
+            if(message!=""){
+                JOptionPane.showMessageDialog(null, "Mensagem extraída com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
+            }
+            txtMensagem.setText(message);
+        }
     }//GEN-LAST:event_btnExtrairMsgActionPerformed
 
     private void btnSelecionarOriginFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarOriginFolderActionPerformed
@@ -867,7 +855,7 @@ public class SecurityEssentials extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSelecionarBackupFolderActionPerformed
 
     private void btnGerarBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarBackupActionPerformed
-                if(txtPathOriginFolder.getText().isEmpty()) {
+        if(txtPathOriginFolder.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Deve ser selecionado um arquivo ou diretório","Aviso",JOptionPane.WARNING_MESSAGE);
         } else{
 
